@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,16 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private SpriteRenderer sr;
     private BoxCollider2D coll;
+
+    [SerializeField] private bool isGrounded = false;
+    [SerializeField] private bool doubleJumped = false;
+    [SerializeField] private float dirX = 0f;
     
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
+    [SerializeField] private float doubleJumpForce = 7f;
     [SerializeField] private LayerMask jumpableGround;
+    [SerializeField] private AudioSource jumpSoundEffect;
     
     private enum MovementState {idle, running, jumping, falling, doubleJump}
 
@@ -27,20 +34,46 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // X axis movement
+        dirX = Input.GetAxisRaw("Horizontal");
+        UpdateAnimationState(dirX);
         Inputs();
     }
 
+    private void FixedUpdate()
+    {
+        isGrounded = IsGrounded();
+    }
+
+
     private void Inputs()
     {
-        // X axis movement
-        float dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
-        UpdateAnimationState(dirX);
         
         // Jumping
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.AddForce(new Vector2(0f,jumpForce), ForceMode2D.Impulse);
+            if (isGrounded)
+            {
+                rb.AddForce(new Vector2(0f,jumpForce), ForceMode2D.Impulse);
+                jumpSoundEffect.Play();
+            }
+            else if (!isGrounded && !doubleJumped)
+            {
+                rb.AddForce(new Vector2(0f,doubleJumpForce), ForceMode2D.Impulse);
+                doubleJumped = true;
+                jumpSoundEffect.Play();
+            }
+            else
+            {
+                return;
+            }
+            
+        }
+
+        if (isGrounded)
+        {
+            doubleJumped = false;
         }
     }
 
@@ -71,6 +104,16 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.falling;
         }
+
+        if (rb.velocity.y > .1f && doubleJumped)
+        {
+            state = MovementState.doubleJump;
+        }
+        else if (rb.velocity.y < -.1f)
+        {
+            state = MovementState.falling;
+        }
+        
         
         anim.SetInteger("State", (int)state);
     }
