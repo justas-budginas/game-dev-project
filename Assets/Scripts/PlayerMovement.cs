@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private SpriteRenderer sr;
     private BoxCollider2D coll;
-
+    
     [SerializeField] private bool isGrounded = false;
     [SerializeField] private bool doubleJumped = false;
     [SerializeField] private float dirX = 0f;
@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float doubleJumpForce = 7f;
     [SerializeField] private LayerMask jumpableGround;
     [SerializeField] private AudioSource jumpSoundEffect;
+    [SerializeField] private ParticleSystem dust;
     
     private enum MovementState {idle, running, jumping, falling, doubleJump}
 
@@ -34,10 +35,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // X axis movement
-        dirX = Input.GetAxisRaw("Horizontal");
-        UpdateAnimationState(dirX);
-        Inputs();
+        if (!PauseMenu.isPaused)
+        {
+            // X axis movement
+            dirX = Input.GetAxisRaw("Horizontal");
+            UpdateAnimationState(dirX);
+            Inputs();
+        }
     }
 
     private void FixedUpdate()
@@ -57,12 +61,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.AddForce(new Vector2(0f,jumpForce), ForceMode2D.Impulse);
                 jumpSoundEffect.Play();
+                CreateDust();
             }
             else if (!isGrounded && !doubleJumped)
             {
                 rb.AddForce(new Vector2(0f,doubleJumpForce), ForceMode2D.Impulse);
                 doubleJumped = true;
                 jumpSoundEffect.Play();
+                CreateDust();
             }
             else
             {
@@ -85,11 +91,13 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.running;
             sr.flipX = false;
+            CreateDust();
         }
         else if (dirX < 0f)
         {
             state = MovementState.running;
             sr.flipX = true;
+            CreateDust();
         }
         else
         {
@@ -121,5 +129,10 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
+    }
+
+    private void CreateDust()
+    {
+        dust.Play();
     }
 }
