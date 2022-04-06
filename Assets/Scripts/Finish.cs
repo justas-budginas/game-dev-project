@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Finish : MonoBehaviour
 {
+    public Animator animator;
     private AudioSource finishSound;
     private bool levelCompleted = false;
     void Start()
@@ -17,6 +18,7 @@ public class Finish : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" && !levelCompleted)
         {
+            animator.SetTrigger("FadeOut");
             levelCompleted = true;
             finishSound.Play();
             Invoke("CompleteLevel", 2f);

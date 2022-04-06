@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
         
         // Jumping
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && !doubleJumped)
         {
             if (isGrounded)
             {
@@ -65,8 +65,8 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (!isGrounded && !doubleJumped)
             {
-                rb.AddForce(new Vector2(0f,doubleJumpForce), ForceMode2D.Impulse);
                 doubleJumped = true;
+                rb.AddForce(new Vector2(0f,doubleJumpForce), ForceMode2D.Impulse);
                 jumpSoundEffect.Play();
                 CreateDust();
             }
