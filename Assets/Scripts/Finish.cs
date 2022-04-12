@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Finish : MonoBehaviour
 {
     public Animator animator;
+    public ParticleSystem particleSystem;
     private AudioSource finishSound;
     private bool levelCompleted = false;
     void Start()
@@ -18,6 +19,7 @@ public class Finish : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" && !levelCompleted)
         {
+            particleSystem.Play();
             animator.SetTrigger("FadeOut");
             levelCompleted = true;
             finishSound.Play();
