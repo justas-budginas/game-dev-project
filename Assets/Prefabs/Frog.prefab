@@ -4818,11 +4818,11 @@ GameObject:
   - component: {fileID: 8492522031133269449}
   - component: {fileID: 8492522031133269453}
   - component: {fileID: 8492522031133269452}
-  - component: {fileID: 8492522031133269491}
   - component: {fileID: 8492522031133269490}
   - component: {fileID: 8492522031133269489}
   - component: {fileID: 8492522031133269488}
   - component: {fileID: 8492522031133269495}
+  - component: {fileID: 5440266043537767332}
   m_Layer: 0
   m_Name: Frog
   m_TagString: Player
@@ -4864,7 +4864,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7ab76e8afb553f840a268acabb2e48d0, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4985,20 +4985,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8492522031133269491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8492522031133269450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35a1a7b41bd7b854c96d349758577c00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectSoundEffect: {fileID: 8492522031133269488}
-  collectiblesText: {fileID: 0}
 --- !u!114 &8492522031133269490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5305,3 +5291,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5440266043537767332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492522031133269450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35a1a7b41bd7b854c96d349758577c00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectSoundEffect: {fileID: 0}
+  collectiblesText: {fileID: 0}

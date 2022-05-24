@@ -14,7 +14,6 @@ public class ItemCollector : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Collectible"))
         {
-            Destroy(col.gameObject);
             collected++;
             collectiblesText.text = "Collectibles: " + collected;
             collectSoundEffect.Play();

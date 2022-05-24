@@ -11,6 +11,9 @@
         },
         {
             "m_Id": "d4547725527f4e3e81a65f49f5528b7d"
+        },
+        {
+            "m_Id": "29a9e78a1a9f4fbbb403c5e38039f5cb"
         }
     ],
     "m_Keywords": [],
@@ -809,6 +812,29 @@
     },
     "m_Labels": [],
     "m_Space": 0
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "29a9e78a1a9f4fbbb403c5e38039f5cb",
+    "m_Guid": {
+        "m_GuidSerialized": "fa7e152c-4a22-4934-a237-f9e27362bfc8"
+    },
+    "m_Name": "ID",
+    "m_DefaultReferenceName": "Vector1_29a9e78a1a9f4fbbb403c5e38039f5cb",
+    "m_OverrideReferenceName": "_ID",
+    "m_GeneratePropertyBlock": true,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
 }
 
 {
